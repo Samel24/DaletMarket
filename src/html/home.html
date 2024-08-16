@@ -17,12 +17,12 @@
         <nav id="sidebar" class="h-[600px] flex justify-center items-center md:relative md:h-full md:-right-0 absolute top-0 -right-full w-2/3 bg-blanco transition-all duration-500">
             <ul class="flex flex-col md:w-full md:flex-row items-center justify-center gap-4">
                 <li id="toggle-cerrar" class="font-breeSerif text-lg text-naranja md:invisible">Cerrar</li>
-                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer" id="logout">Logout</li>
-                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer">Tienda</li>
-                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer"><a href="https://github.com/Samel24">Contacto</a></li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-red-600 transition-all duration-500" id="logout">Logout</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-azul transition-all duration-500">Tienda</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-azul transition-all duration-500"><a href="https://github.com/Samel24">Contacto</a></li>
                 <form class="w-full justify-center items-center flex md:w-[300px] px-4 gap-2">
                     <input type="text" id="search" placeholder="Buscar..." class="px-4 py-2 rounded-3xl border-2 border-naranja focus:outline-none w-2/3 md:w-full text-sm md:text-lg font-breeSerif">
-                    <button type="button" onclick="buscar()" class="bg-azul p-2 text-blanco font-breeSerif rounded-3xl border-2 border-azul">Search</button>
+                    <button type="button" onclick="buscar()" class="bg-azul p-2 text-blanco font-breeSerif rounded-3xl border-2 border-azul hover:border-naranja hover:bg-naranja transition-all duration-500">Search</button>
                 </form>
             </ul>
         </nav>
@@ -46,7 +46,7 @@
                     <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Belleza')" value="Belleza">Belleza</li>
                 </ul>
                 <h3 class="text-xl font-breeSerif font-bold mt-8 mb-4">Acciones:</h3>
-                <button id="openModal" class="mb-12 rounded-xl text-blanco bg-azul font-breeSerif px-4 py-2" data-modal-target="default-modal" data-modal-toggle="default-modal" type="button">Agregar Producto</button>
+                <button id="openModal" class="mb-12 rounded-xl text-blanco hover:bg-naranja transition-all duration-500 bg-azul font-breeSerif px-4 py-2" data-modal-target="default-modal" data-modal-toggle="default-modal" type="button">Agregar Producto</button>
             </section>
             <section id="tienda" class="md:ml-[20%] h-auto w-[100%] md:w-[80%] p-2 md:px-6 gap-8 flex flex-wrap items-center justify-center">
                                 

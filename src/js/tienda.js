@@ -215,9 +215,9 @@ function loadStore() {
                             <span class="text-3xl font-lato font-bold text-negro">${item.precio}${item.moneda}</span>
                         </div>
                         <div class="flex gap-2 flex-wrap">
-                            <button class="border-2 border-azul rounded-lg p-2 font-breeSerif" onclick="vender(${item.id})">Vender</button>
-                            <button class="border-2 border-rojasio rounded-lg p-2 font-breeSerif" onclick="editar(${item.id})">Editar</button>
-                            <button class="border-2 border-red-600 rounded-lg p-2 font-breeSerif" onclick="eliminar(${item.id})">Eliminar</button>
+                            <button class="border-2 border-azul rounded-lg p-2 font-breeSerif text-negro hover:text-blanco hover:bg-azul transition-all duration-500" onclick="vender(${item.id})">Vender</button>
+                            <button class="border-2 border-rojasio rounded-lg p-2 font-breeSerif text-negro hover:text-blanco hover:bg-rojasio transition-all duration-500" onclick="editar(${item.id})">Editar</button>
+                            <button class="border-2 border-red-600 rounded-lg p-2 font-breeSerif text-negro hover:text-blanco hover:bg-red-600 transition-all duration-500" onclick="eliminar(${item.id})">Eliminar</button>
                         </div>
                     </div>
                 </div>`
