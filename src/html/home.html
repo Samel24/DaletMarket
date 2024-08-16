@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/build/styles.css">
+    <script src="../../public/assets/sweet/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../../public/assets/sweet/sweetalert2.css">
+    <title>Tienda</title>
+</head>
+<body>
+    <header class="fixed w-full h-[80px] flex items-center p-4 bg-blanco">
+        <h1 class="text-3xl text-naranja font-lato font-bold"><b class="text-azul">D</b>alet<b class="text-azul">M</b>arket</h1>
+        <div class="w-full flex justify-end md:invisible">
+            <span id="toggle-btn">Abrir</span>
+        </div>
+        <nav id="sidebar" class="h-[600px] flex justify-center items-center md:relative md:h-full md:-right-0 absolute top-0 -right-full w-2/3 bg-blanco transition-all duration-500">
+            <ul class="flex flex-col md:w-full md:flex-row items-center justify-center gap-4">
+                <li id="toggle-cerrar" class="font-breeSerif text-lg text-naranja md:invisible">Cerrar</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer" id="logout">Logout</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer">Tienda</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer"><a href="https://github.com/Samel24">Contacto</a></li>
+                <form class="w-full justify-center items-center flex md:w-[300px] px-4 gap-2">
+                    <input type="text" id="search" placeholder="Buscar..." class="px-4 py-2 rounded-3xl border-2 border-naranja focus:outline-none w-2/3 md:w-full text-sm md:text-lg font-breeSerif">
+                    <button type="button" onclick="buscar()" class="bg-azul p-2 text-blanco font-breeSerif rounded-3xl border-2 border-azul">Search</button>
+                </form>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pt-[112px] w-full h-auto pb-8 px-4 lg:px-8 min-h-[100vh]">
+        <h2 class="text-2xl font-lato text-negro mb-8">Productos Disponibles (<i id="cantidad"></i>)</h2>
+        <div class="flex flex-col md:flex-row">
+            <section class="w-[100%] h-auto md:w-[20%] md:border-r-[3px] md:border-naranja md:p-4 md:fixed">
+                <h3 class="text-xl font-breeSerif font-bold mb-8">Categorias:</h3>
+                <ul class="flex md:flex-col flex-wrap gap-4 pb-8 md:gap-2 md:border-b-[3px] md:pl-4 md:pb-8 md:border-naranja">
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" id="todos" name="filtrado" onclick="filtrar('Todos')" value="Todos">Todos</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Tecnologia')" value="Tecnologia">Tecnologia</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Ropa')" value="Ropa">Ropa</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Accesorios')" value="Accesorios">Accesorios</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Electrodomesticos')" value="Electro - Domesticos">Electro - Domesticos</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Comida')" value="Comida">Comida</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Videojuegos')" value="Videojuegos">Videojuegos</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Vehiculos')" value="Vehiculos">Vehiculos</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Servicios')" value="Servicios">Servicios</li>
+                    <li class="text-negro font-breeSerif text-md flex flex-wrap gap-1 items-center"><input type="radio" name="filtrado" onclick="filtrar('Belleza')" value="Belleza">Belleza</li>
+                </ul>
+                <h3 class="text-xl font-breeSerif font-bold mt-8 mb-4">Acciones:</h3>
+                <button id="openModal" class="mb-12 rounded-xl text-blanco bg-azul font-breeSerif px-4 py-2" data-modal-target="default-modal" data-modal-toggle="default-modal" type="button">Agregar Producto</button>
+            </section>
+            <section id="tienda" class="md:ml-[20%] h-auto w-[100%] md:w-[80%] p-2 md:px-6 gap-8 flex flex-wrap items-center justify-center">
+                                
+            </section>
+            
+        </div>
+        <div id="modal" class="fixed invisible top-0 left-0 bg-opacity-40 bg-negro w-[100vw] h-[100vh] flex items-center justify-center"> 
+            <div class="w-[90%] h-[80%] md:w-[80%] md:h-[60%] bg-blanco border-naranja border-[3px] rounded-3xl">
+                <form id="formStore" class="flex flex-col justify-center items-center gap-4 h-full w-full p-4">
+                    <h4 class="font-lato font-bold text-3xl mb-8 text-negro">Registrar Producto</h4>
+                    <input type="text" name="nombre" id="nombre"  placeholder="Nombre" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <select name="categoria" id="categoria" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Electrodomesticos">Electrodomesticos</option>
+                        <option value="Comida">Comida</option>
+                        <option value="Videojuegos">Videojuegos</option>
+                        <option value="Vehiculos">Vehiculos</option>
+                        <option value="Servicios">Servicios</option>
+                        <option value="Belleza">Belleza</option>
+                    </select>
+                    <input type="text" name="descripcion" id="descripcion"  placeholder="Descripcion" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <div class="flex flex-col md:flex-row gap-4 w-full lg:w-2/3">
+                        <input type="number" min="0" name="precio" id="precio"  placeholder="Precio" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                        <input type="text" name="moneda" id="moneda"  placeholder="Moneda" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    </div>
+                    <input type="text" name="imagen" id="imagen"  placeholder="Url de la Imagen" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <div class="w-full lg:w-2/3 flex justify-end gap-4 mt-4">
+                        <button type="button" class="bg-azul p-2 rounded-xl font-breeSerif text-blanco" id="closeModal">Regresar</button>
+                        <button type="submit" class="bg-azul p-2 rounded-xl font-breeSerif text-blanco">Agregar</button>       
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modalEditar" class="fixed invisible top-0 left-0 bg-opacity-40 bg-negro w-[100vw] h-[100vh] flex items-center justify-center"> 
+            <div class="md:w-[80%] md:h-[60%] bg-blanco border-naranja border-[3px] rounded-3xl">
+                <form id="formStoreEdit" class="flex flex-col justify-center items-center gap-4 h-full w-full p-4">
+                    <h4 class="font-lato font-bold text-3xl mb-8 text-negro">Editar Producto</h4>
+                    <input type="text" name="idEdit" id="idEdit" disabled placeholder="Id" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <input type="text" name="nombre" id="nombreEdit"  placeholder="Nombre" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <select name="categoria" id="categoriaEdit" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Electrodomesticos">Electrodomesticos</option>
+                        <option value="Comida">Comida</option>
+                        <option value="Videojuegos">Videojuegos</option>
+                        <option value="Vehiculos">Vehiculos</option>
+                        <option value="Servicios">Servicios</option>
+                        <option value="Belleza">Belleza</option>
+                    </select>
+                    <input type="text" name="descripcion" id="descripcionEdit"  placeholder="Descripcion" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <div class="flex flex-col md:flex-row gap-4 w-full lg:w-2/3">
+                        <input type="number" min="0" name="precio" id="precioEdit"  placeholder="Precio" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                        <input type="text" name="moneda" id="monedaEdit"  placeholder="Moneda" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    </div>
+                    <input type="text" name="imagen" id="imagenEdit"  placeholder="Url de la Imagen" class="border-[2px] border-azul rounded-lg bg-white focus:outline-none w-full lg:w-2/3 px-2 py-1 font-breeSerif text-md">
+                    <div class="w-full lg:w-2/3 flex justify-end gap-4 mt-4">
+                        <button type="button" class="bg-azul p-2 rounded-xl font-breeSerif text-blanco" id="closeModalEditar">Regresar</button>
+                        <button type="submit" class="bg-azul p-2 rounded-xl font-breeSerif text-blanco">Editar</button>       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    
+    <script src="../js/header.js"></script>
+    <script src="../js/tienda.js"></script>
+</body>
+</html>
