@@ -18,14 +18,13 @@ let login = JSON.parse(localStorage.getItem("login"));
 let store = JSON.parse(localStorage.getItem("store"));
 
 todos.checked = true
+let new_store = ``
 
 function uuidv4() {
     return "10000000".replace(/[018]/g, c =>
         (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 16 >> +c / 4).toString(16)
     );
 }
-
-let new_store = ``
 
 logout.addEventListener('click', e => {
     localStorage.removeItem("login");
@@ -205,7 +204,6 @@ function loadStore() {
     let cantidad = document.getElementById("cantidad")
     cantidad.textContent = store.length
     store.forEach(item => {
-        let monto = item.precio + item.moneda
         new_store = new_store + `<div class=" max-w-sm bg-blanco border-2 border-naranja rounded-xl w-[100%] md:w-[40%] lg:w-[30%] min-h-[550px] ">
                         <img class="rounded-t-lg border-b-2 border-naranja" src="${item.imagen}" alt="product image" />
                     <div class="px-5 pb-5 pt-5 flex flex-col gap-4">
@@ -239,6 +237,7 @@ function alertaCorrecto(title) {
 
 if (store === null) {
     localStorage.setItem("store", JSON.stringify(store_default));
+    store = store_default
     loadStore()
 }
 

@@ -18,7 +18,7 @@
             <ul class="flex flex-col md:w-full md:flex-row items-center justify-center gap-4">
                 <li id="toggle-cerrar" class="font-breeSerif text-lg text-naranja md:invisible">Cerrar</li>
                 <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-red-600 transition-all duration-500" id="logout">Logout</li>
-                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-azul transition-all duration-500">Tienda</li>
+                <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-azul transition-all duration-500"><a href="#productos-disponibles">Tienda</a></li>
                 <li class="font-breeSerif text-sm md:text-lg hover:cursor-pointer text-negro hover:text-azul transition-all duration-500"><a href="https://github.com/Samel24">Contacto</a></li>
                 <form class="w-full justify-center items-center flex md:w-[300px] px-4 gap-2">
                     <input type="text" id="search" placeholder="Buscar..." class="px-4 py-2 rounded-3xl border-2 border-naranja focus:outline-none w-2/3 md:w-full text-sm md:text-lg font-breeSerif">
@@ -28,8 +28,9 @@
         </nav>
     </header>
 
-    <main class="pt-[112px] w-full h-auto pb-8 px-4 lg:px-8 min-h-[100vh]">
-        <h2 class="text-2xl font-lato text-negro mb-8">Productos Disponibles (<i id="cantidad"></i>)</h2>
+    <main class="w-full h-auto py-8 px-4 lg:p-8 min-h-[100vh]">
+        <div class="h-[80px]" id="productos-disponibles"></div>
+        <h2 class="text-2xl font-lato text-negro mb-8" >Productos Disponibles (<i id="cantidad"></i>)</h2>
         <div class="flex flex-col md:flex-row">
             <section class="w-[100%] h-auto md:w-[20%] md:border-r-[3px] md:border-naranja md:p-4 md:fixed">
                 <h3 class="text-xl font-breeSerif font-bold mb-8">Categorias:</h3>

@@ -1654,6 +1654,11 @@ input:checked + .toggle-bg{
   padding-bottom: 0.75rem;
 }
 
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .pb-5{
   padding-bottom: 1.25rem;
 }
@@ -2212,6 +2217,10 @@ input:checked + .toggle-bg{
 
   .lg\:w-\[30\%\]{
     width: 30%;
+  }
+
+  .lg\:p-8{
+    padding: 2rem;
   }
 
   .lg\:px-8{
